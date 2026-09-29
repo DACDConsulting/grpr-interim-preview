@@ -1,48 +1,26 @@
 name: Publish GRPR site
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: write
-
-concurrency:
-  group: publish-site
-  cancel-in-progress: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Unpack interim site onto working tree
+      - name: Stage HTML from repo root
         run: |
           set -euo pipefail
-          unzip -o GRPR-Interim-Site_3.zip
-          mkdir -p public
-          cp -a GRPR-Interim-Site/site/. public/
-          touch public/.nojekyll
-          cp -a GRPR-Interim-Site/site/. .
-          touch .nojekyll
-          ls -la public | head
-      - name: Commit exploded site to main if needed
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No site file changes"
-          else
-            git commit -m "Publish exploded GRPR interim site"
-            git push
-          fi
+          mkdir -p /tmp/site/css /tmp/site/js
+          cp -a *.html /tmp/site/
+          cp -a css/. /tmp/site/css/
+          cp -a js/. /tmp/site/js/
+          touch /tmp/site/.nojekyll
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: /tmp/site
           publish_branch: gh-pages
