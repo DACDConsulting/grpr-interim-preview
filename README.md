@@ -1,34 +1,33 @@
 # GRPR interim site preview
 
-Working static preview of the GRPR interim website for Gray Reed attorney and marketing review (Pastel).
-
-**Live site (after Pages is on):** https://dacdconsulting.github.io/grpr-interim-preview/
+Static HTML site for GRPR / Gray Reed review.
 
 **Repo:** https://github.com/DACDConsulting/grpr-interim-preview
 
-## Turn on GitHub Pages
+## Bolt.new
 
-1. Open [Settings → Pages](https://github.com/DACDConsulting/grpr-interim-preview/settings/pages)
-2. Source: **GitHub Actions**
-3. Re-run the **Deploy GitHub Pages** workflow if it has not published yet
+Bolt cannot preview raw HTML with no `package.json`. This repo now includes Vite.
 
-Alternatively: Source **Deploy from a branch**, branch `gh-pages`, folder `/`.
+1. Import **this repo, branch `main`**, as a **new** Bolt project (do not reuse the old blank import).
+2. Let Bolt run `npm install` and `npm run dev`.
+3. You should see the GRPR homepage.
 
-## Local preview
+Paste the prompt in `BOLT.md` if Bolt tries to turn the site into React.
+
+## Local
 
 ```bash
-# from this repo, after the site files are on main:
-python3 -m http.server 8000
-# open http://127.0.0.1:8000
+npm install
+npm run dev
 ```
 
-Or unzip `GRPR-Interim-Site_3.zip` and open `GRPR-Interim-Site/site/index.html`.
+Or open `index.html` directly.
 
 ## Pages
 
 | File | Page |
 |---|---|
-| `index.html` | Home — GA + PR slider |
+| `index.html` | Home |
 | `why-grpr.html` | Why GRPR |
 | `government-affairs.html` | Government Affairs |
 | `public-relations.html` | Public Relations |
@@ -36,7 +35,4 @@ Or unzip `GRPR-Interim-Site_3.zip` and open `GRPR-Interim-Site/site/index.html`.
 | `grids.html` | GRIDS |
 | `team.html` | Our Team |
 | `insights.html` | Insights |
-| `video-rylander-0X.html` | Video templates |
 | `contact.html` | Contact |
-
-Stack: plain HTML, `css/site.css`, `js/site.js`. No framework.
