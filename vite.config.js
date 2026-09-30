@@ -8,6 +8,8 @@ const input = Object.fromEntries(
   htmlPages.map((f) => [f.replace(/\.html$/, ''), resolve(root, f)])
 );
 
+const VISIBLE_STYLE = `<style id="grpr-visible">.reveal,.ins-card,.person,.photo{opacity:1!important;transform:none!important;visibility:visible!important}.ins-thumb img,.person .photo img,.mini .av img{opacity:1!important;display:block}</style>`;
+
 const MENU_SCRIPT = `<script>
 document.addEventListener("click",function(e){
   var t=e.target.closest&&e.target.closest(".menu-toggle");
@@ -29,8 +31,13 @@ export default defineConfig({
     {
       name: 'grpr-mpa',
       transformIndexHtml(html) {
-        if (html.includes('body.classList.toggle("nav-open")')) return html;
-        return html.replace('</body>', MENU_SCRIPT + '\n</body>');
+        if (!html.includes('id="grpr-visible"')) {
+          html = html.replace('</head>', VISIBLE_STYLE + '\n</head>');
+        }
+        if (!html.includes('body.classList.toggle("nav-open")')) {
+          html = html.replace('</body>', MENU_SCRIPT + '\n</body>');
+        }
+        return html;
       },
       closeBundle() {
         if (!existsSync('dist')) mkdirSync('dist');
