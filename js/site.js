@@ -112,3 +112,20 @@
     });
   });
 })();
+
+/* Click-to-play YouTube posters — works on bolt.host and WordPress */
+(function () {
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.video-poster');
+    if (!btn) return;
+    var frame = btn.closest('.video-frame');
+    if (!frame) return;
+    var id = frame.getAttribute('data-yt');
+    if (!id) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var src = 'https://www.youtube-nocookie.com/embed/' + id +
+      '?autoplay=1&rel=0&modestbranding=1&playsinline=1&origin=' + encodeURIComponent(location.origin);
+    frame.innerHTML = '<iframe src="' + src + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+  }, true);
+})();
