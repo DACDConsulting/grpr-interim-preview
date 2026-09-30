@@ -1,3 +1,19 @@
-/* Preview safety: never hide people cards behind .reveal opacity:0 */
 .reveal { opacity: 1 !important; transform: none !important; }
-.person .photo img, .mini .av img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.person .photo img, .mini .av img { opacity: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Why GRPR: section labels + jump-nav underline in brand navy */
+.page-why .jumpnav a {
+  color: #03465a;
+  border-bottom: 2px solid #03465a;
+}
+.page-why .jumpnav a:hover {
+  color: #03465a;
+  border-bottom-color: #03465a;
+  opacity: .72;
+}
+.page-why .eyebrow:not(.light) {
+  color: #03465a;
+}
+.page-why .eyebrow:not(.light)::before {
+  background: linear-gradient(90deg, #03465a 0 28%, transparent 28% 36%, #03465a 36% 64%, transparent 64% 72%, #03465a 72% 100%);
+}
