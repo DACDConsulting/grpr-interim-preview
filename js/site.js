@@ -2,12 +2,23 @@
 (function () {
   var body = document.body;
   var toggle = document.querySelector('.menu-toggle');
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      var open = body.classList.toggle('nav-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  var check = document.getElementById('nav-toggle');
+  function setOpen(open) {
+    body.classList.toggle('nav-open', !!open);
+    if (check) check.checked = !!open;
+    if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (check) {
+    check.addEventListener('change', function () { setOpen(check.checked); });
+  } else if (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      setOpen(!body.classList.contains('nav-open'));
     });
   }
+  document.querySelectorAll('.nav a').forEach(function (a) {
+    a.addEventListener('click', function () { setOpen(false); });
+  });
   document.querySelectorAll('.nav .has-dd > button').forEach(function (btn) {
     btn.addEventListener('click', function () {
       if (window.innerWidth > 960) return;
@@ -23,11 +34,12 @@
     }, { rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (el) { io.observe(el); });
   } else { els.forEach(function (el) { el.classList.add('in'); }); }
+  setTimeout(function () { els.forEach(function (el) { el.classList.add('in'); }); }, 600);
   var y = document.querySelectorAll('[data-year]');
   y.forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
 
-/* Home hero slider: auto-advances when each tab's progress bar finishes; pauses on hover/focus. */
+/* Home hero slider */
 (function () {
   document.querySelectorAll('[data-slider]').forEach(function (root) {
     var copies = root.querySelectorAll('.slide-copy');
@@ -59,12 +71,10 @@
     root.addEventListener('mouseenter', function () { root.classList.add('paused'); });
     root.addEventListener('mouseleave', function () { root.classList.remove('paused'); });
     root.addEventListener('focusin', function (e) {
-      // pause only for keyboard focus, not after a tap/click on a tab
       var kb = true; try { kb = e.target.matches(':focus-visible'); } catch (err) {}
       if (kb) root.classList.add('paused');
     });
     root.addEventListener('focusout', function () { root.classList.remove('paused'); });
-    // Touch: swipe left/right on the image or copy to change slides
     var sx = null, sy = null;
     root.addEventListener('touchstart', function (e) { var t = e.touches[0]; sx = t.clientX; sy = t.clientY; }, { passive: true });
     root.addEventListener('touchend', function (e) {
