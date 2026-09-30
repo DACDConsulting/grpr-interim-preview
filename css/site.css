@@ -243,7 +243,6 @@ strong { font-family: var(--font-semi); font-weight: 600; }
   display: flex; align-items: center; justify-content: center;
 }
 .person .photo span { font-family: var(--font-light); font-size: 54px; color: #C4C5C7; letter-spacing: .02em; }
-.person .photo::after { content: "Headshot"; position: absolute; bottom: 12px; left: 14px; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #A6A7AA; }
 .person .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .person .practice { font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--red); font-family: var(--font-semi); margin-bottom: 8px; }
 .person h3 { font-family: var(--font-semi); font-weight: 600; font-size: 20px; letter-spacing: -0.005em; }
