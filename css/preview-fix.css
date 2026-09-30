@@ -1,7 +1,7 @@
 .reveal, .ins-card { opacity: 1 !important; transform: none !important; visibility: visible !important; }
 .ins-thumb img, .person .photo img, .mini .av img { opacity: 1 !important; display: block; width: 100%; height: 100%; object-fit: cover; }
+.person .photo::after { display: none !important; }
 
-/* Why GRPR: section labels + jump-nav underline in brand red */
 .page-why .jumpnav a {
   color: #A91D37;
   border-bottom: 2px solid #A91D37;
