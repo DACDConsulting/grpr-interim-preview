@@ -1,0 +1,48 @@
+[build]
+  command = "npx vite build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/insights"
+  to = "/insights.html"
+  status = 200
+[[redirects]]
+  from = "/team"
+  to = "/team.html"
+  status = 200
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+[[redirects]]
+  from = "/why-grpr"
+  to = "/why-grpr.html"
+  status = 200
+[[redirects]]
+  from = "/government-affairs"
+  to = "/government-affairs.html"
+  status = 200
+[[redirects]]
+  from = "/public-relations"
+  to = "/public-relations.html"
+  status = 200
+[[redirects]]
+  from = "/crisis-command"
+  to = "/crisis-command.html"
+  status = 200
+[[redirects]]
+  from = "/grids"
+  to = "/grids.html"
+  status = 200
+[[redirects]]
+  from = "/video-rylander-01"
+  to = "/video-rylander-01.html"
+  status = 200
+[[redirects]]
+  from = "/video-rylander-02"
+  to = "/video-rylander-02.html"
+  status = 200
+[[redirects]]
+  from = "/video-rylander-03"
+  to = "/video-rylander-03.html"
+  status = 200
