@@ -29,8 +29,3 @@ h2 { font-size: clamp(28px, 3.2vw, 42px); }
   .tagline { white-space: normal; }
   h1 { font-size: 40px; }
 }
-
-.bio-top .role { margin: 8px 0 0; font-size: 16px; color: #5c6570; }
-.bio-top .office { margin: 10px 0 0; font-size: 15px; color: #1c1c1c; }
-.bio-top .contact { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 12px; }
-.bio-top .contact a { display: block; }
