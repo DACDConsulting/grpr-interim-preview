@@ -13,3 +13,5 @@ body {
 .hero h1, .slide-title { font-size: clamp(40px, 6.2vw, 80px); line-height: 1.02; }
 .page-hero .lead, .hero .lead { font-size: clamp(17px, 1.5vw, 20px); }
 h2 { font-size: clamp(28px, 3.2vw, 42px); }
+.person .photo, .bio-top .photo, .mini .av { aspect-ratio: 1 / 1; overflow: hidden; }
+.person .photo img, .bio-top .photo img, .mini .av img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
