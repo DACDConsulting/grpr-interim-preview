@@ -27,6 +27,8 @@
 .sim-out .card{background:#fff;border:1px solid var(--line,#e6e6e6);padding:22px}
 .sim-con{margin-top:16px;padding:16px 18px;background:#fff;border-left:4px solid #A91D37}
 .sim-con b{display:block;margin-bottom:6px}
+.sim-again{display:inline-flex;align-items:center;height:42px;padding:0 18px;background:#1f4e79;color:#fff;border:0;border-radius:4px;cursor:pointer;font:inherit;font-size:14px}
+.sim-again:hover{background:#163a5a}
 @media(max-width:800px){.sim-grid,.sim-out{grid-template-columns:1fr}}
 </style></head>
 <body>
@@ -132,7 +134,7 @@
     var left=state.retained
       ? '<div class="sim-meta">Handled by the team</div><h3 style="margin:0 0 10px">Crisis Command would already be in this.</h3><p>In the first 15 minutes the spokesperson, the facts, and what gets preserved are set with Gray Reed. In the next 48 hours employees, the people affected, and the press hear one confirmed message — not a supervisor, a social post, or silence.</p><p>'+(ready?"Your answers track that plan.":"A few of those answers are the ones that set the story before you do. The retainer is what keeps them from happening live.")+'</p>'+missList
       : '<div class="sim-meta">This is the gap</div><h3 style="margin:0 0 10px">The first comment usually comes from the wrong person.</h3><p>Without a plan, the first 15 minutes decide the headline and the next 48 hours are spent catching it. Crisis Command is the readiness, response, and recovery for this window — communications with Gray Reed on the legal side.</p><p>'+(ready?"You know the right moves. The missing piece is a team that can run them at 5 p.m. on a Friday.":"Those hours are where organizations lose the narrative. A readiness engagement builds the plan before the call.")+'</p>'+missList;
-    var right='<div class="card"><h4>'+(state.retained?"Activate the team":"Put the team on call")+'</h4><p>'+(state.retained?"If this is close to a live matter, call. The first 15 are already running.":"Talk through this scenario and what a readiness engagement covers.")+'</p><p><a class="btn sm" href="contact.html">Contact Us <span class="arrow"></span></a></p><p style="margin-top:12px"><a href="tel:9723651178">Marc Rylander · 972.365.1178</a></p><p style="margin-top:14px"><button type="button" id="sim-again" style="background:none;border:0;padding:0;color:#A91D37;cursor:pointer">Run another scenario</button></p></div>';
+    var right='<div class="card"><h4>'+(state.retained?"Activate the team":"Put the team on call")+'</h4><p>'+(state.retained?"If this is close to a live matter, call. The first 15 are already running.":"Talk through this scenario and what a readiness engagement covers.")+'</p><p><a class="btn sm" href="contact.html">Contact Us <span class="arrow"></span></a></p><p style="margin-top:14px"><button type="button" class="sim-again" id="sim-again">Run another scenario</button></p></div>';
     el('<div class="sim-out"><div>'+left+'</div>'+right+'</div>');
     document.getElementById("sim-again").onclick=function(){state={step:"pick"}; draw();};
   }
