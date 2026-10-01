@@ -1,0 +1,15 @@
+html { font-size: 16px; }
+body {
+  font-family: Figtree, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+.wrap { max-width: 1240px; }
+.site-header .wrap { height: 84px; }
+.brand img, .brand.grpr img { height: 46px; width: auto; }
+.nav > ul > li > a, .nav > ul > li > button { font-size: 14px; }
+.utility { font-size: 12.5px; }
+.page-hero h1 { font-size: clamp(38px, 5.2vw, 66px); line-height: 1.04; }
+.hero h1, .slide-title { font-size: clamp(40px, 6.2vw, 80px); line-height: 1.02; }
+.page-hero .lead, .hero .lead { font-size: clamp(17px, 1.5vw, 20px); }
+h2 { font-size: clamp(28px, 3.2vw, 42px); }
