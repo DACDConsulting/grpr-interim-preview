@@ -12,18 +12,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
 <style>
+#simulator{background:#1c1c1c;color:#fff}
+#simulator .eyebrow{color:#fff}
+#simulator .s-head p,#simulator .disclaimer{color:rgba(255,255,255,.72)}
 .sim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.sim-card{text-align:left;background:#fff;border:1px solid var(--line,#e6e6e6);padding:22px;cursor:pointer;font:inherit;color:inherit}
-.sim-card:hover,.sim-card.on{border-color:#A91D37}
-.sim-card b{display:block;font-size:18px;margin:8px 0}
+.sim-card{text-align:left;background:#fff;color:#1c1c1c;border:0;border-top:4px solid #A91D37;padding:22px;cursor:pointer;font:inherit}
+.sim-card:hover{transform:translateY(-2px)}
+.sim-card b{display:block;font-size:20px;margin:8px 0}
 .sim-card span{display:block;font-size:14.5px;line-height:1.5;color:#5c6570}
-.sim-q{font-size:22px;margin:0 0 8px}
-.sim-choices{display:grid;gap:10px;margin-top:16px}
-.sim-choices button{text-align:left;background:#fff;border:1px solid var(--line,#e6e6e6);padding:14px 16px;cursor:pointer;font:inherit}
-.sim-choices button:hover{border-color:#A91D37}
-.sim-meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#A91D37;margin-bottom:8px}
+.sim-q{font-size:28px;line-height:1.2;margin:0 0 8px;max-width:18em}
+.sim-choices{display:grid;gap:10px;margin-top:18px}
+.sim-choices button{text-align:left;background:#fff;color:#1c1c1c;border:0;padding:16px 18px;cursor:pointer;font:inherit;font-size:16px}
+.sim-choices button:hover{background:#A91D37;color:#fff}
+.sim-meta{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A91D37;margin-bottom:8px}
 .sim-out{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
-.sim-out .card{background:#fff;border:1px solid var(--line,#e6e6e6);padding:22px}
+.sim-out .card{background:#A91D37;color:#fff;padding:28px}
+.sim-out .card a,.sim-out .card button{color:#fff}
+.sim-out .btn{background:#fff;color:#A91D37;border-color:#fff}
 @media(max-width:800px){.sim-grid,.sim-out{grid-template-columns:1fr}}
 </style></head>
 <body>
@@ -66,7 +71,7 @@
       </div></div></section><section class="section"><div class="wrap"><div class="s-head"><div><div class="eyebrow">Track record</div><h2>Guidance through the hardest moments.</h2></div><p>Crisis Command professionals have guided organizations through some of the most challenging situations they will ever face — and helped them use the experience to build more resilient operations.</p></div>
       <ul class="checklist cols-2"><li>Industrial accidents and catastrophic incidents</li><li>OSHA, DOJ, SEC, DOL, EEOC, IRS and DOT investigations</li><li>Cybersecurity and data breach events</li><li>Workplace fatalities</li><li>Executive misconduct investigations</li><li>Public entity and school district crises</li><li>High-profile litigation matters</li><li>Mass-casualty incidents</li><li>Reputation recovery efforts</li><li>Long-term governance and compliance transformations</li></ul></div></section><section class="section" id="readiness"><div class="wrap"><div class="s-head"><div><div class="eyebrow">Crisis readiness</div><h2>Build the capability <br>before you need it.</h2></div><p>When a crisis hits, your leadership team must make decisions in minutes — not hours. We don’t hand you a binder. We build your team’s ability to perform under real pressure.</p></div>
       <ul class="checklist cols-3"><li>Crisis readiness assessments and gap analysis</li><li>Risk and exposure evaluations tailored to your industry</li><li>Crisis communications planning and spokesperson preparation</li><li>Incident response protocols and activation procedures</li><li>Government investigation and regulatory preparedness</li><li>Cybersecurity readiness reviews</li><li>Workforce incident planning</li><li>Tabletop exercises and live simulations</li><li>Board and executive crisis training</li></ul>
-      <p class="cta-line">Every organization’s risk profile is different. <a class="link" href="contact.html">Talk to us about a readiness engagement <span class="arrow"></span></a></p></div></section><section class="section wash" id="simulator"><div class="wrap">
+      <p class="cta-line">Every organization’s risk profile is different. <a class="link" href="contact.html">Talk to us about a readiness engagement <span class="arrow"></span></a></p></div></section><section class="section" id="simulator"><div class="wrap">
 <div class="s-head"><div><div class="eyebrow">Before the call comes</div><h2>Run the first hours.</h2></div><p>Pick a scenario. See what the first 15 minutes and the next 48 hours demand — and where Crisis Command steps in.</p></div>
 <div id="sim"></div>
 <p class="disclaimer" style="margin-top:22px">This is a planning exercise, not legal advice. GRPR professionals are not lawyers. Communications with GRPR outside the direction of Gray Reed counsel may not be privileged.</p>
