@@ -11,6 +11,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/preview-fix.css">
+<style>
+.hs-wrap { max-width: 640px; }
+.hs-form-frame {
+  --hsf-global__font-family: Figtree, Arial, sans-serif;
+  --hsf-background__background-color: transparent;
+  --hsf-field-label__color: #1c1c1c;
+  --hsf-field-input__border-color: #BFC0C3;
+  --hsf-field-input__color: #1c1c1c;
+  --hsf-button__background-color: #A91D37;
+  --hsf-button__color: #fff;
+  --hsf-button__border-radius: 0;
+}
+.hs-note { color: #6b6e73; font-size: 13px; max-width: 46ch; margin-top: 18px; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -37,18 +51,11 @@
 </section>
 <section class="section">
   <div class="wrap detail">
-    <form class="form" id="contact-form" action="#" method="post" data-portal="243205128" data-form="be7d8240-64c7-4410-89b8-d10d13c9f2f8" data-region="na2">
-      <div class="form-grid">
-        <div class="field"><label for="fn">First name</label><input id="fn" name="firstname" autocomplete="given-name" required></div>
-        <div class="field"><label for="ln">Last name</label><input id="ln" name="lastname" autocomplete="family-name" required></div>
-        <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email" required></div>
-        <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" required></div>
-        <div class="field"><label for="org">Organization</label><input id="org" name="company" autocomplete="organization" required></div>
-        <div class="field"><label for="int">Area of interest</label><select id="int" name="area_of_interest" required><option value="">Select…</option><option>Government Affairs</option><option>Public Relations</option><option>Crisis Command</option><option>GRIDS</option><option>Other</option></select></div>
-        <div class="field full"><label for="msg">How can we help?</label><textarea id="msg" name="how_can_we_help" required></textarea></div>
-      </div>
-      <div class="form-foot"><small id="form-note">All fields are required. Please don’t include confidential information. Submitting this form does not create an attorney-client or advisory relationship.</small><button class="btn" type="submit">Send Message <span class="arrow"></span></button></div>
-    </form>
+    <div class="hs-wrap">
+      <script src="https://js-na2.hsforms.net/forms/embed/243205128.js" defer></script>
+      <div class="hs-form-frame" data-region="na2" data-form-id="be7d8240-64c7-4410-89b8-d10d13c9f2f8" data-portal-id="243205128"></div>
+      <p class="hs-note">Please don’t include confidential information. Submitting this form does not create an attorney-client or advisory relationship.</p>
+    </div>
     <aside class="aside">
       <div class="card"><h4>Offices</h4>
         <div class="offices" style="border-top:0">
@@ -77,50 +84,5 @@
   </div>
 </footer>
 <script src="js/site.js"></script>
-<script id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/243205128.js"></script>
-<script>
-(function () {
-  var form = document.getElementById('contact-form');
-  if (!form) return;
-  var note = document.getElementById('form-note');
-  var btn = form.querySelector('button[type="submit"]');
-  function cookie(name) {
-    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-    return m ? decodeURIComponent(m[1]) : '';
-  }
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!form.reportValidity()) return;
-    var portal = form.getAttribute('data-portal');
-    var guid = form.getAttribute('data-form');
-    var region = form.getAttribute('data-region') || 'na1';
-    var fields = [];
-    Array.prototype.forEach.call(form.elements, function (el) {
-      if (!el.name || el.disabled) return;
-      fields.push({ name: el.name, value: el.value });
-    });
-    var help = form.querySelector('[name="how_can_we_help"]');
-    if (help) fields.push({ name: 'message', value: help.value });
-    var host = region === 'na1' ? 'https://api.hsforms.com' : 'https://api-' + region + '.hsforms.com';
-    btn.disabled = true;
-    note.textContent = 'Sending…';
-    fetch(host + '/submissions/v3/integration/submit/' + portal + '/' + guid, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fields: fields,
-        context: { hutk: cookie('hubspotutk'), pageUri: location.href, pageName: document.title }
-      })
-    }).then(function (res) {
-      return res.text().then(function (text) { if (!res.ok) throw new Error(text || ('HubSpot ' + res.status)); });
-    }).then(function () {
-      form.reset();
-      note.textContent = 'Thank you. A member of the GRPR team will follow up.';
-    }).catch(function () {
-      note.textContent = 'We couldn’t send that just now. Please call 214.954.4135 or try again.';
-    }).then(function () { btn.disabled = false; });
-  });
-})();
-</script>
 </body>
 </html>
