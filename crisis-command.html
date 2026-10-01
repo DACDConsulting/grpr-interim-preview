@@ -11,7 +11,21 @@
 <!-- Fallback font. Replace with the licensed Gibson web-font kit used on grayreed.com when available. -->
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
-</head>
+<style>
+.sim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sim-card{text-align:left;background:#fff;border:1px solid var(--line,#e6e6e6);padding:22px;cursor:pointer;font:inherit;color:inherit}
+.sim-card:hover,.sim-card.on{border-color:#A91D37}
+.sim-card b{display:block;font-size:18px;margin:8px 0}
+.sim-card span{display:block;font-size:14.5px;line-height:1.5;color:#5c6570}
+.sim-q{font-size:22px;margin:0 0 8px}
+.sim-choices{display:grid;gap:10px;margin-top:16px}
+.sim-choices button{text-align:left;background:#fff;border:1px solid var(--line,#e6e6e6);padding:14px 16px;cursor:pointer;font:inherit}
+.sim-choices button:hover{border-color:#A91D37}
+.sim-meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#A91D37;margin-bottom:8px}
+.sim-out{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
+.sim-out .card{background:#fff;border:1px solid var(--line,#e6e6e6);padding:22px}
+@media(max-width:800px){.sim-grid,.sim-out{grid-template-columns:1fr}}
+</style></head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="utility"><div class="wrap"><span class="u-left">Public Relations &amp; Government Affairs · A division of Gray Reed Advisory Services</span><span class="u-links"><a href="https://www.grayreedadvisory.com">Gray Reed Advisory</a><a href="https://www.grayreed.com">Gray Reed</a><a href="https://www.linkedin.com/" aria-label="LinkedIn">LinkedIn</a></span></div></div>
@@ -34,7 +48,7 @@
       <p class="lead">Your crisis plan should be built before the call comes. We make sure it is.</p>
     </div>
   </div>
-</section><nav class="jumpnav" aria-label="On this page"><div class="wrap"><a href="#approach">Our Approach</a><a href="#readiness">Readiness</a><a href="#first-15">The First 15</a><a href="#next-48">The Next 48</a><a href="#response">Response</a><a href="#recovery">Recovery</a><a href="#industries">Industries</a><a href="#contacts">Contacts</a></div></nav><section class="section"><div class="wrap"><div class="split">
+</section><nav class="jumpnav" aria-label="On this page"><div class="wrap"><a href="#approach">Our Approach</a><a href="#readiness">Readiness</a><a href="#simulator">Run a scenario</a><a href="#first-15">The First 15</a><a href="#next-48">The Next 48</a><a href="#response">Response</a><a href="#recovery">Recovery</a><a href="#industries">Industries</a><a href="#contacts">Contacts</a></div></nav><section class="section"><div class="wrap"><div class="split">
       <div><div class="eyebrow">Why it matters</div><h2>Preparation decides <br>the outcome.</h2></div>
       <div class="prose">
         <p class="intro">Organizations don’t fail during a crisis because they lack capable people. They fail because the critical decisions — who’s in charge, what gets preserved, who talks to the media, when legal counsel engages — were never resolved before the pressure hit.</p>
@@ -52,7 +66,76 @@
       </div></div></section><section class="section"><div class="wrap"><div class="s-head"><div><div class="eyebrow">Track record</div><h2>Guidance through the hardest moments.</h2></div><p>Crisis Command professionals have guided organizations through some of the most challenging situations they will ever face — and helped them use the experience to build more resilient operations.</p></div>
       <ul class="checklist cols-2"><li>Industrial accidents and catastrophic incidents</li><li>OSHA, DOJ, SEC, DOL, EEOC, IRS and DOT investigations</li><li>Cybersecurity and data breach events</li><li>Workplace fatalities</li><li>Executive misconduct investigations</li><li>Public entity and school district crises</li><li>High-profile litigation matters</li><li>Mass-casualty incidents</li><li>Reputation recovery efforts</li><li>Long-term governance and compliance transformations</li></ul></div></section><section class="section" id="readiness"><div class="wrap"><div class="s-head"><div><div class="eyebrow">Crisis readiness</div><h2>Build the capability <br>before you need it.</h2></div><p>When a crisis hits, your leadership team must make decisions in minutes — not hours. We don’t hand you a binder. We build your team’s ability to perform under real pressure.</p></div>
       <ul class="checklist cols-3"><li>Crisis readiness assessments and gap analysis</li><li>Risk and exposure evaluations tailored to your industry</li><li>Crisis communications planning and spokesperson preparation</li><li>Incident response protocols and activation procedures</li><li>Government investigation and regulatory preparedness</li><li>Cybersecurity readiness reviews</li><li>Workforce incident planning</li><li>Tabletop exercises and live simulations</li><li>Board and executive crisis training</li></ul>
-      <p class="cta-line">Every organization’s risk profile is different. <a class="link" href="contact.html">Talk to us about a readiness engagement <span class="arrow"></span></a></p></div></section><section class="band-dark" id="first-15"><div class="wrap">
+      <p class="cta-line">Every organization’s risk profile is different. <a class="link" href="contact.html">Talk to us about a readiness engagement <span class="arrow"></span></a></p></div></section><section class="section wash" id="simulator"><div class="wrap">
+<div class="s-head"><div><div class="eyebrow">Before the call comes</div><h2>Run the first hours.</h2></div><p>Pick a scenario. See what the first 15 minutes and the next 48 hours demand — and where Crisis Command steps in.</p></div>
+<div id="sim"></div>
+<p class="disclaimer" style="margin-top:22px">This is a planning exercise, not legal advice. GRPR professionals are not lawyers. Communications with GRPR outside the direction of Gray Reed counsel may not be privileged.</p>
+</div></section>
+<script>
+(function(){
+  var root=document.getElementById("sim");
+  if(!root) return;
+  var scenarios=[
+    {id:"site", name:"Workplace incident", blurb:"An employee is seriously hurt on a job site. A reporter is already calling.",
+      d15:[{q:"A reporter is on the line. Who answers?", a:["The supervisor on site, off the cuff","No one comments until the spokesperson is up"], good:1},
+            {q:"What happens to the scene?", a:["Cleanup starts so work can resume","The scene is held and counsel is notified"], good:1}],
+      d48:[{q:"Families and employees still have no written update.", a:["Wait until the investigation is finished","One confirmed update goes out from the spokesperson"], good:1},
+            {q:"The story is running without you.", a:["Decline every request","One short confirmed statement, then stop"], good:1}]},
+    {id:"data", name:"Data breach", blurb:"Systems are locked. Customers and a regulator may need notice.",
+      d15:[{q:"Do you announce now?", a:["Post that you were hacked before the facts are confirmed","Contain first and confirm what you actually know"], good:1},
+            {q:"Who is in the room?", a:["IT only","Leadership, counsel, and communications together"], good:1}],
+      d48:[{q:"Customers are asking if their data moved.", a:["Stay silent until the notice is perfect","Draft the notice with counsel and send when the facts are stable"], good:1},
+            {q:"A regulator may need to hear from you.", a:["Wait to be asked","Prepare the notice on the required clock"], good:1}]},
+    {id:"spot", name:"Sudden spotlight", blurb:"An allegation about a leader is spreading. A reporter has emailed.",
+      d15:[{q:"The CEO wants to reply personally.", a:["Post a response now","No post until the facts are checked"], good:1},
+            {q:"Employees are seeing it on social first.", a:["Let them hear it outside","A short internal note goes first"], good:1}],
+      d48:[{q:"The reporter’s deadline is today.", a:["No comment, with nothing else prepared","A short confirmed statement, and nothing more"], good:1},
+            {q:"The board has not been briefed.", a:["Deal with it Monday","Brief the board the same day"], good:1}]}
+  ];
+  var state={step:"pick"};
+  function el(html){root.innerHTML=html;}
+  function pick(){
+    el('<div class="sim-grid">'+scenarios.map(function(s,i){
+      return '<button class="sim-card" data-i="'+i+'"><div class="sim-meta">Scenario</div><b>'+s.name+'</b><span>'+s.blurb+'</span></button>';
+    }).join("")+"</div>");
+    root.querySelectorAll("[data-i]").forEach(function(b){b.onclick=function(){state.s=+b.dataset.i; state.step="retainer"; draw();};});
+  }
+  function retainer(){
+    var s=scenarios[state.s];
+    el('<div class="sim-meta">'+s.name+'</div><p class="sim-q">Is Crisis Command already on call?</p><div class="sim-choices"><button data-r="1">Yes. GRPR and Gray Reed are on the plan.</button><button data-r="0">No. We would be starting from scratch.</button></div>');
+    root.querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){state.retained=b.dataset.r==="1"; state.phase="15"; state.n=0; state.score=0; state.step="ask"; draw();};});
+  }
+  function ask(){
+    var s=scenarios[state.s];
+    var list=state.phase==="15"?s.d15:s.d48;
+    var item=list[state.n];
+    var label=state.phase==="15"?"The first 15 minutes":"The next 48 hours";
+    el('<div class="sim-meta">'+s.name+' · '+label+'</div><p class="sim-q">'+item.q+'</p><div class="sim-choices">'+item.a.map(function(a,i){return '<button data-a="'+i+'">'+a+'</button>';}).join("")+'</div>');
+    root.querySelectorAll("[data-a]").forEach(function(b){b.onclick=function(){
+      if(+b.dataset.a===item.good) state.score++;
+      state.n++;
+      if(state.n>=list.length){
+        if(state.phase==="15"){state.phase="48"; state.n=0;}
+        else state.step="out";
+      }
+      draw();
+    };});
+  }
+  function out(){
+    var s=scenarios[state.s];
+    var ready=state.score>=3;
+    var left=state.retained
+      ? '<div class="sim-meta">Handled by the team</div><h3 style="margin:0 0 10px">Crisis Command would already be in this.</h3><p>In the first 15 minutes the spokesperson, the facts, and what gets preserved are set with Gray Reed. In the next 48 hours employees, the people affected, and the press hear one confirmed message — not a supervisor, a social post, or silence.</p><p>'+(ready?"Your answers track that plan.":"A few of those answers are the ones that set the story before you do. The retainer is what keeps them from happening live.")+'</p>'
+      : '<div class="sim-meta">This is the gap</div><h3 style="margin:0 0 10px">The first comment usually comes from the wrong person.</h3><p>Without a plan, the first 15 minutes decide the headline and the next 48 hours are spent catching it. Crisis Command is the readiness, response, and recovery for this window — communications with Gray Reed on the legal side.</p><p>'+(ready?"You know the right moves. The missing piece is a team that can run them at 5 p.m. on a Friday.":"Those hours are where organizations lose the narrative. A readiness engagement builds the plan before the call.")+'</p>';
+    var right='<div class="card"><h4>'+(state.retained?"Activate the team":"Put the team on call")+'</h4><p>'+(state.retained?"If this is close to a live matter, call. The first 15 are already running.":"Talk through this scenario and what a readiness engagement covers.")+'</p><p><a class="btn sm" href="contact.html">Contact Us <span class="arrow"></span></a></p><p style="margin-top:12px"><a href="tel:9723651178">Marc Rylander · 972.365.1178</a></p><p style="margin-top:14px"><button type="button" id="sim-again" style="background:none;border:0;padding:0;color:#A91D37;cursor:pointer">Run another scenario</button></p></div>';
+    el('<div class="sim-out"><div>'+left+'</div>'+right+'</div>');
+    document.getElementById("sim-again").onclick=function(){state={step:"pick"}; draw();};
+  }
+  function draw(){ if(state.step==="pick") pick(); else if(state.step==="retainer") retainer(); else if(state.step==="ask") ask(); else out(); }
+  draw();
+})();
+</script>
+<section class="band-dark" id="first-15"><div class="wrap">
       <div class="band-grid">
         <div><div class="eyebrow light">Framework</div><h2 class="band-title">The First 15</h2>
           <p class="band-lead">The earliest minutes of a crisis determine the trajectory of everything that follows. The First 15 is Crisis Command’s framework for establishing command, preserving critical information, coordinating decision-makers and maintaining control during the opening stage of an incident.</p>
