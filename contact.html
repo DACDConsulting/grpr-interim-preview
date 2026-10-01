@@ -10,10 +10,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/preview-fix.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="utility"><div class="wrap"><span class="u-left">Public Relations &amp; Government Affairs · A division of Gray Reed Advisory Services</span><span class="u-links"><a href="https://www.grayreedadvisory.com">Gray Reed Advisory</a><a href="https://www.grayreed.com">Gray Reed</a><a href="https://www.linkedin.com/" aria-label="LinkedIn">LinkedIn</a></span></div></div>
+<div class="utility"><div class="wrap"><span class="u-left">Public Relations & Government Affairs · A division of Gray Reed Advisory Services</span><span class="u-links"><a href="https://www.grayreedadvisory.com">Gray Reed Advisory</a><a href="https://www.grayreed.com">Gray Reed</a><a href="https://www.linkedin.com/" aria-label="LinkedIn">LinkedIn</a></span></div></div>
 <header class="site-header">
   <div class="wrap">
     <a class="brand grpr" href="index.html"><img src="https://www.grprpublicaffairs.com/wp-content/uploads/sites/895/2023/08/grpr-logo-color.svg" alt="GRPR"></a>
@@ -36,17 +37,17 @@
 </section>
 <section class="section">
   <div class="wrap detail">
-    <form class="form" action="#" method="post" onsubmit="event.preventDefault(); this.querySelector('.form-foot small').textContent='Thank you — this demo form does not submit yet.';">
+    <form class="form" id="contact-form" action="#" method="post" data-portal="" data-form="" data-region="na1" novalidate>
       <div class="form-grid">
-        <div class="field"><label for="fn">First name</label><input id="fn" name="first_name" autocomplete="given-name" required></div>
-        <div class="field"><label for="ln">Last name</label><input id="ln" name="last_name" autocomplete="family-name" required></div>
+        <div class="field"><label for="fn">First name</label><input id="fn" name="firstname" autocomplete="given-name" required></div>
+        <div class="field"><label for="ln">Last name</label><input id="ln" name="lastname" autocomplete="family-name" required></div>
         <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email" required></div>
         <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" name="phone" autocomplete="tel"></div>
-        <div class="field"><label for="org">Organization</label><input id="org" name="organization" autocomplete="organization"></div>
-        <div class="field"><label for="int">Area of interest</label><select id="int" name="interest"><option value="">Select…</option><option>Government Affairs</option><option>Public Relations</option><option>Crisis Command</option><option>GRIDS</option><option>Other</option></select></div>
+        <div class="field"><label for="org">Organization</label><input id="org" name="company" autocomplete="organization"></div>
+        <div class="field"><label for="int">Area of interest</label><select id="int" name="area_of_interest"><option value="">Select…</option><option>Government Affairs</option><option>Public Relations</option><option>Crisis Command</option><option>GRIDS</option><option>Other</option></select></div>
         <div class="field full"><label for="msg">How can we help?</label><textarea id="msg" name="message"></textarea></div>
       </div>
-      <div class="form-foot"><small>Please don’t include confidential information. Submitting this form does not create an attorney-client or advisory relationship.</small><button class="btn" type="submit">Send Message <span class="arrow"></span></button></div>
+      <div class="form-foot"><small id="form-note">Please don’t include confidential information. Submitting this form does not create an attorney-client or advisory relationship.</small><button class="btn" type="submit">Send Message <span class="arrow"></span></button></div>
     </form>
     <aside class="aside">
       <div class="card"><h4>Offices</h4>
@@ -76,5 +77,56 @@
   </div>
 </footer>
 <script src="js/site.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var note = document.getElementById('form-note');
+  var btn = form.querySelector('button[type="submit"]');
+  function cookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var portal = form.getAttribute('data-portal');
+    var guid = form.getAttribute('data-form');
+    if (!portal || !guid) {
+      note.textContent = 'This form is styled and ready. HubSpot portal and form IDs still need to be added before it can submit.';
+      return;
+    }
+    if (!form.reportValidity()) return;
+    var fields = [];
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || el.disabled) return;
+      if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+      if (!el.value) return;
+      fields.push({ name: el.name, value: el.value });
+    });
+    btn.disabled = true;
+    note.textContent = 'Sending…';
+    fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + portal + '/' + guid, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fields: fields,
+        context: {
+          hutk: cookie('hubspotutk'),
+          pageUri: location.href,
+          pageName: document.title
+        }
+      })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('HubSpot ' + res.status);
+      return res.json().catch(function () { return {}; });
+    }).then(function () {
+      form.reset();
+      note.textContent = 'Thank you. A member of the GRPR team will follow up.';
+    }).catch(function () {
+      note.textContent = 'We couldn’t send that just now. Please call 214.954.4135 or try again.';
+    }).then(function () { btn.disabled = false; });
+  });
+})();
+</script>
 </body>
 </html>
