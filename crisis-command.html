@@ -13,10 +13,11 @@
 <link rel="stylesheet" href="css/site.css">
 <style>
 .sim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.sim-card{text-align:left;background:#fff;border:1px solid var(--line,#e6e6e6);padding:22px;cursor:pointer;font:inherit;color:inherit}
-.sim-card:hover,.sim-card.on{border-color:#A91D37}
-.sim-card b{display:block;font-size:18px;margin:8px 0}
-.sim-card span{display:block;font-size:14.5px;line-height:1.5;color:#5c6570}
+.sim-card{text-align:left;background:#A91D37;color:#fff;border:0;border-radius:18px;padding:22px 22px 24px;cursor:pointer;font:inherit}
+.sim-card:hover{background:#8d172e}
+.sim-card b{display:block;font-size:20px;margin:8px 0;color:#fff}
+.sim-card span,.sim-card .sim-meta{display:block;font-size:14.5px;line-height:1.5;color:#fff}
+.sim-card .sim-meta{color:rgba(255,255,255,.8)}
 .sim-q{font-size:22px;margin:0 0 8px}
 .sim-choices{display:grid;gap:10px;margin-top:16px}
 .sim-choices button{text-align:left;background:#fff;border:1px solid var(--line,#e6e6e6);padding:14px 16px;cursor:pointer;font:inherit}
