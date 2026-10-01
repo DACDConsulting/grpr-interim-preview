@@ -24,6 +24,8 @@
 .sim-meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#A91D37;margin-bottom:8px}
 .sim-out{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
 .sim-out .card{background:#fff;border:1px solid var(--line,#e6e6e6);padding:22px}
+.sim-con{margin-top:16px;padding:16px 18px;background:#fff;border-left:4px solid #A91D37}
+.sim-con b{display:block;margin-bottom:6px}
 @media(max-width:800px){.sim-grid,.sim-out{grid-template-columns:1fr}}
 </style></head>
 <body>
@@ -77,20 +79,20 @@
   if(!root) return;
   var scenarios=[
     {id:"site", name:"Workplace incident", blurb:"An employee is seriously hurt on a job site. A reporter is already calling.",
-      d15:[{q:"A reporter is on the line. Who answers?", a:["The supervisor on site, off the cuff","No one comments until the spokesperson is up"], good:1},
-            {q:"What happens to the scene?", a:["Cleanup starts so work can resume","The scene is held and counsel is notified"], good:1}],
-      d48:[{q:"Families and employees still have no written update.", a:["Wait until the investigation is finished","One confirmed update goes out from the spokesperson"], good:1},
-            {q:"The story is running without you.", a:["Decline every request","One short confirmed statement, then stop"], good:1}]},
+      d15:[{q:"A reporter is on the line. Who answers?", a:["The supervisor on site, off the cuff","No one comments until the spokesperson is up"], good:1, con:"That quote becomes the story. It is hard to walk back, and it may conflict with the facts and with counsel's later position."},
+            {q:"What happens to the scene?", a:["Cleanup starts so work can resume","The scene is held and counsel is notified"], good:1, con:"The record can be disturbed before investigators and counsel are on it. What looked like getting back to work can become a second problem."}],
+      d48:[{q:"Families and employees still have no written update.", a:["Wait until the investigation is finished","One confirmed update goes out from the spokesperson"], good:1, con:"The gap fills with rumor. Families and employees hear it from the news, or from someone who was not in the room."},
+            {q:"The story is running without you.", a:["Decline every request","One short confirmed statement, then stop"], good:1, con:"The story runs on other people's accounts. Silence reads as hiding something, even when you are still gathering facts."}]},
     {id:"data", name:"Data breach", blurb:"Systems are locked. Customers and a regulator may need notice.",
-      d15:[{q:"Do you announce now?", a:["Post that you were hacked before the facts are confirmed","Contain first and confirm what you actually know"], good:1},
-            {q:"Who is in the room?", a:["IT only","Leadership, counsel, and communications together"], good:1}],
-      d48:[{q:"Customers are asking if their data moved.", a:["Stay silent until the notice is perfect","Draft the notice with counsel and send when the facts are stable"], good:1},
-            {q:"A regulator may need to hear from you.", a:["Wait to be asked","Prepare the notice on the required clock"], good:1}]},
+      d15:[{q:"Do you announce now?", a:["Post that you were hacked before the facts are confirmed","Contain first and confirm what you actually know"], good:1, con:"You may have to correct the first post. A correction looks like a cover-up, and you may have described the wrong scope."},
+            {q:"Who is in the room?", a:["IT only","Leadership, counsel, and communications together"], good:1, con:"Notice clocks and the public statement get missed. IT can contain the systems. It cannot set what employees, customers, or a regulator hear."}],
+      d48:[{q:"Customers are asking if their data moved.", a:["Stay silent until the notice is perfect","Draft the notice with counsel and send when the facts are stable"], good:1, con:"Customers assume the worst. Reporters and plaintiffs will describe the breach before you do."},
+            {q:"A regulator may need to hear from you.", a:["Wait to be asked","Prepare the notice on the required clock"], good:1, con:"A missed notice can become its own case. Waiting to be asked does not stop the clock."}]},
     {id:"spot", name:"Sudden spotlight", blurb:"An allegation about a leader is spreading. A reporter has emailed.",
-      d15:[{q:"The CEO wants to reply personally.", a:["Post a response now","No post until the facts are checked"], good:1},
-            {q:"Employees are seeing it on social first.", a:["Let them hear it outside","A short internal note goes first"], good:1}],
-      d48:[{q:"The reporter’s deadline is today.", a:["No comment, with nothing else prepared","A short confirmed statement, and nothing more"], good:1},
-            {q:"The board has not been briefed.", a:["Deal with it Monday","Brief the board the same day"], good:1}]}
+      d15:[{q:"The CEO wants to reply personally.", a:["Post a response now","No post until the facts are checked"], good:1, con:"An unconfirmed post is a permanent quote. If the facts move, that post is what gets replayed."},
+            {q:"Employees are seeing it on social first.", a:["Let them hear it outside","A short internal note goes first"], good:1, con:"Trust breaks inside the building. Someone who feels left out is often the next call the reporter gets."}],
+      d48:[{q:"The reporter's deadline is today.", a:["No comment, with nothing else prepared","A short confirmed statement, and nothing more"], good:1, con:"No comment, with no line ready, becomes the story. You have nothing to say when it spreads."},
+            {q:"The board has not been briefed.", a:["Deal with it Monday","Brief the board the same day"], good:1, con:"Directors learn it from the press. That is a governance problem on top of the original one."}]}
   ];
   var state={step:"pick"};
   function el(html){root.innerHTML=html;}
@@ -103,7 +105,7 @@
   function retainer(){
     var s=scenarios[state.s];
     el('<div class="sim-meta">'+s.name+'</div><p class="sim-q">Is Crisis Command already on call?</p><div class="sim-choices"><button data-r="1">Yes. GRPR and Gray Reed are on the plan.</button><button data-r="0">No. We would be starting from scratch.</button></div>');
-    root.querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){state.retained=b.dataset.r==="1"; state.phase="15"; state.n=0; state.score=0; state.step="ask"; draw();};});
+    root.querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){state.retained=b.dataset.r==="1"; state.phase="15"; state.n=0; state.score=0; state.misses=[]; state.step="ask"; draw();};});
   }
   function ask(){
     var s=scenarios[state.s];
@@ -112,26 +114,43 @@
     var label=state.phase==="15"?"The first 15 minutes":"The next 48 hours";
     el('<div class="sim-meta">'+s.name+' · '+label+'</div><p class="sim-q">'+item.q+'</p><div class="sim-choices">'+item.a.map(function(a,i){return '<button data-a="'+i+'">'+a+'</button>';}).join("")+'</div>');
     root.querySelectorAll("[data-a]").forEach(function(b){b.onclick=function(){
-      if(+b.dataset.a===item.good) state.score++;
-      state.n++;
-      if(state.n>=list.length){
-        if(state.phase==="15"){state.phase="48"; state.n=0;}
-        else state.step="out";
-      }
+      var picked=+b.dataset.a;
+      if(picked===item.good){state.score++; advance(); return;}
+      state.misses=state.misses||[];
+      state.misses.push({q:item.q, con:item.con});
+      state.pending=item;
+      state.step="con";
       draw();
     };});
   }
   function out(){
     var s=scenarios[state.s];
     var ready=state.score>=3;
+    var misses=(state.misses||[]).map(function(m){return "<li><b>"+m.q+"</b> "+m.con+"</li>";}).join("");
+    var missList=misses?"<div class=\"sim-con\"><b>What the wrong calls can set off</b><ul style=\"margin:8px 0 0;padding-left:18px\">"+misses+"</ul></div>":"";
     var left=state.retained
-      ? '<div class="sim-meta">Handled by the team</div><h3 style="margin:0 0 10px">Crisis Command would already be in this.</h3><p>In the first 15 minutes the spokesperson, the facts, and what gets preserved are set with Gray Reed. In the next 48 hours employees, the people affected, and the press hear one confirmed message — not a supervisor, a social post, or silence.</p><p>'+(ready?"Your answers track that plan.":"A few of those answers are the ones that set the story before you do. The retainer is what keeps them from happening live.")+'</p>'
-      : '<div class="sim-meta">This is the gap</div><h3 style="margin:0 0 10px">The first comment usually comes from the wrong person.</h3><p>Without a plan, the first 15 minutes decide the headline and the next 48 hours are spent catching it. Crisis Command is the readiness, response, and recovery for this window — communications with Gray Reed on the legal side.</p><p>'+(ready?"You know the right moves. The missing piece is a team that can run them at 5 p.m. on a Friday.":"Those hours are where organizations lose the narrative. A readiness engagement builds the plan before the call.")+'</p>';
+      ? '<div class="sim-meta">Handled by the team</div><h3 style="margin:0 0 10px">Crisis Command would already be in this.</h3><p>In the first 15 minutes the spokesperson, the facts, and what gets preserved are set with Gray Reed. In the next 48 hours employees, the people affected, and the press hear one confirmed message — not a supervisor, a social post, or silence.</p><p>'+(ready?"Your answers track that plan.":"A few of those answers are the ones that set the story before you do. The retainer is what keeps them from happening live.")+'</p>'+missList
+      : '<div class="sim-meta">This is the gap</div><h3 style="margin:0 0 10px">The first comment usually comes from the wrong person.</h3><p>Without a plan, the first 15 minutes decide the headline and the next 48 hours are spent catching it. Crisis Command is the readiness, response, and recovery for this window — communications with Gray Reed on the legal side.</p><p>'+(ready?"You know the right moves. The missing piece is a team that can run them at 5 p.m. on a Friday.":"Those hours are where organizations lose the narrative. A readiness engagement builds the plan before the call.")+'</p>'+missList;
     var right='<div class="card"><h4>'+(state.retained?"Activate the team":"Put the team on call")+'</h4><p>'+(state.retained?"If this is close to a live matter, call. The first 15 are already running.":"Talk through this scenario and what a readiness engagement covers.")+'</p><p><a class="btn sm" href="contact.html">Contact Us <span class="arrow"></span></a></p><p style="margin-top:12px"><a href="tel:9723651178">Marc Rylander · 972.365.1178</a></p><p style="margin-top:14px"><button type="button" id="sim-again" style="background:none;border:0;padding:0;color:#A91D37;cursor:pointer">Run another scenario</button></p></div>';
     el('<div class="sim-out"><div>'+left+'</div>'+right+'</div>');
     document.getElementById("sim-again").onclick=function(){state={step:"pick"}; draw();};
   }
-  function draw(){ if(state.step==="pick") pick(); else if(state.step==="retainer") retainer(); else if(state.step==="ask") ask(); else out(); }
+  function advance(){
+    var s=scenarios[state.s];
+    var list=state.phase==="15"?s.d15:s.d48;
+    state.n++;
+    if(state.n>=list.length){
+      if(state.phase==="15"){state.phase="48"; state.n=0; state.step="ask";}
+      else state.step="out";
+    } else state.step="ask";
+    draw();
+  }
+  function con(){
+    var item=state.pending;
+    el('<div class="sim-meta">What that choice can set off</div><p class="sim-q">'+item.a[0]+'</p><div class="sim-con"><b>The downside</b>'+item.con+'</div><div class="sim-choices"><button id="sim-next">Continue</button></div>');
+    document.getElementById("sim-next").onclick=function(){state.pending=null; advance();};
+  }
+  function draw(){ if(state.step==="pick") pick(); else if(state.step==="retainer") retainer(); else if(state.step==="ask") ask(); else if(state.step==="con") con(); else out(); }
   draw();
 })();
 </script>
