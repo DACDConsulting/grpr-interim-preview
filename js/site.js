@@ -39,6 +39,21 @@
   y.forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
 
+/* Site-wide name: Government Relations */
+(function () {
+  document.querySelectorAll('a[href="government-affairs.html"], a[href="./government-affairs.html"]').forEach(function (a) {
+    a.setAttribute('href', 'government-relations.html');
+  });
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  var node;
+  while ((node = walker.nextNode())) {
+    if (!node.nodeValue || node.nodeValue.indexOf('Government Affairs') === -1 && node.nodeValue.indexOf('government affairs') === -1) continue;
+    var parent = node.parentElement;
+    if (parent && parent.closest && parent.closest('option, select, script, textarea')) continue;
+    node.nodeValue = node.nodeValue.replace(/Government Affairs/g, 'Government Relations').replace(/government affairs/g, 'government relations');
+  }
+})();
+
 /* Home hero slider */
 (function () {
   document.querySelectorAll('[data-slider]').forEach(function (root) {
@@ -61,12 +76,14 @@
       tabs.forEach(function (t, i) {
         t.setAttribute('aria-selected', i === cur ? 'true' : 'false');
         var bar = t.querySelector('.t-bar i');
+        if (!bar) return;
         bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';
       });
     }
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { go(i); });
-      t.querySelector('.t-bar i').addEventListener('animationend', function () { if (i === cur) go(cur + 1); });
+      var bar = t.querySelector('.t-bar i');
+      if (bar) bar.addEventListener('animationend', function () { if (i === cur) go(cur + 1); });
     });
     root.addEventListener('mouseenter', function () { root.classList.add('paused'); });
     root.addEventListener('mouseleave', function () { root.classList.remove('paused'); });
@@ -113,7 +130,7 @@
   });
 })();
 
-/* Click-to-play YouTube posters — works on bolt.host and WordPress */
+/* Click-to-play YouTube posters */
 (function () {
   document.addEventListener('click', function (e) {
     var btn = e.target.closest && e.target.closest('.video-poster');
