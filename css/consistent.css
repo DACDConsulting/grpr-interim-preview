@@ -19,3 +19,13 @@ h2 { font-size: clamp(28px, 3.2vw, 42px); }
 .bio-top { display: flex; align-items: center; gap: 28px; }
 .bio-top .photo { width: 220px; max-width: 42vw; flex: none; aspect-ratio: 1 / 1; }
 .bio-top .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
+
+@media (max-width: 960px) {
+  .site-header .wrap { height: 68px; }
+  .brand img, .brand.grpr img { height: 38px; }
+  .bio-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .bio-top .photo { width: 180px; }
+  .people, .people.three { grid-template-columns: 1fr 1fr; }
+  .tagline { white-space: normal; }
+  h1 { font-size: 40px; }
+}
