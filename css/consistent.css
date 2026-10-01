@@ -6,7 +6,8 @@ body {
 }
 .wrap { max-width: 1240px; }
 .site-header .wrap { height: 84px; }
-.brand img, .brand.grpr img { height: 46px; width: auto; }
+.brand, .brand.grpr { flex: 0 0 auto; }
+.brand img, .brand.grpr img { height: 46px; width: auto !important; max-width: none; object-fit: contain; flex-shrink: 0; }
 .nav > ul > li > a, .nav > ul > li > button { font-size: 14px; }
 .utility { font-size: 12.5px; }
 .page-hero h1 { font-size: clamp(38px, 5.2vw, 66px); line-height: 1.04; }
@@ -22,7 +23,7 @@ h2 { font-size: clamp(28px, 3.2vw, 42px); }
 
 @media (max-width: 960px) {
   .site-header .wrap { height: 68px; }
-  .brand img, .brand.grpr img { height: 38px; }
+  .brand img, .brand.grpr img { height: 38px; width: auto !important; }
   .bio-top { flex-direction: column; align-items: flex-start; gap: 16px; }
   .bio-top .photo { width: 180px; }
   .people, .people.three { grid-template-columns: 1fr 1fr; }

@@ -75,9 +75,9 @@ strong { font-family: var(--font-semi); font-weight: 600; }
 /* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.97); backdrop-filter: saturate(1.4) blur(8px); border-bottom: 1px solid var(--line); }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 84px; gap: 24px; }
-.brand { display: flex; align-items: center; flex: 0 1 auto; }
+.brand { display: flex; align-items: center; flex: 0 0 auto; }
 .brand img { height: 38px; width: auto; }
-.brand.grpr img { height: 46px; }
+.brand.grpr img { height: 46px; width: auto; object-fit: contain; }
 
 .nav { display: flex; align-items: center; gap: 4px; }
 .nav > ul { list-style: none; display: flex; gap: 2px; margin: 0; padding: 0; align-items: center; }
