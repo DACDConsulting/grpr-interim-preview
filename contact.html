@@ -42,7 +42,7 @@
         <div class="field"><label for="fn">First name</label><input id="fn" name="firstname" autocomplete="given-name" required></div>
         <div class="field"><label for="ln">Last name</label><input id="ln" name="lastname" autocomplete="family-name" required></div>
         <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email" required></div>
-        <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" required></div>
+        <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" name="mobilephone" autocomplete="tel" required></div>
         <div class="field"><label for="org">Organization</label><input id="org" name="company" autocomplete="organization" required></div>
         <div class="field"><label for="int">Area of interest</label><select id="int" name="area_of_interest" required><option value="">Select…</option><option>Government Affairs</option><option>Public Relations</option><option>Crisis Command</option><option>GRIDS</option><option>Other</option></select></div>
         <div class="field full"><label for="msg">How can we help?</label><textarea id="msg" name="how_can_we_help" required></textarea></div>
@@ -94,8 +94,6 @@
       if (!el.name || el.disabled) return;
       fields.push({ name: el.name, value: el.value });
     });
-    var help = form.querySelector('[name="how_can_we_help"]');
-    if (help) fields.push({ name: 'message', value: help.value });
     var host = region === 'na1' ? 'https://api.hsforms.com' : 'https://api-' + region + '.hsforms.com';
     btn.disabled = true;
     note.textContent = 'Sending…';
@@ -104,17 +102,12 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fields: fields, context: { pageUri: location.href, pageName: document.title } })
     }).then(function (res) {
-      return res.text().then(function (text) {
-        if (!res.ok) throw new Error(text || '');
-      });
+      return res.text().then(function (text) { if (!res.ok) throw new Error(text || ''); });
     }).then(function () {
       form.reset();
       note.textContent = 'Thank you. A member of the GRPR team will follow up.';
-    }).catch(function (err) {
-      var captcha = /CAPTCHA|RECAPTCHA/i.test(String(err && err.message));
-      note.textContent = captcha
-        ? 'HubSpot blocked this because captcha is on. Turn captcha off on that form, then try again.'
-        : 'We couldn’t send that just now. Please call 214.954.4135 or try again.';
+    }).catch(function () {
+      note.textContent = 'We couldn’t send that just now. Please call 214.954.4135 or try again.';
     }).then(function () { btn.disabled = false; });
   });
 })();
