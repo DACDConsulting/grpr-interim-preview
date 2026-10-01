@@ -679,3 +679,7 @@ section[id] { scroll-margin-top: 150px; }
 .sketch.color img.wash { filter: saturate(1.6); mix-blend-mode: color; }
 .sketch.color img.bleed { filter: blur(12px) saturate(1.2) brightness(1.6); mix-blend-mode: multiply; opacity: .18; }
 .nav > ul > li > a, .nav > ul > li > button, .nav-cta { white-space: nowrap; }
+
+.bio-top { display: flex; align-items: center; gap: 28px; }
+.bio-top .photo { width: 220px; height: 220px; flex: none; aspect-ratio: 1 / 1; overflow: hidden; margin: 0; }
+.bio-top .photo img { position: static; width: 220px; height: 220px; object-fit: cover; object-position: center 15%; display: block; }
