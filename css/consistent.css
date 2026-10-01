@@ -29,3 +29,17 @@ h2 { font-size: clamp(28px, 3.2vw, 42px); }
   .tagline { white-space: normal; }
   h1 { font-size: 40px; }
 }
+
+@media (min-width: 760px) {
+  .menu-toggle { display: none !important; }
+  .nav, body .nav {
+    position: static !important; visibility: visible !important; opacity: 1 !important;
+    transform: none !important; height: auto !important; display: flex !important;
+    background: transparent !important; padding: 0 !important; overflow: visible !important;
+  }
+  .nav > ul { display: flex !important; flex-direction: row !important; }
+}
+@media (max-width: 759px) {
+  .menu-toggle { display: block !important; }
+  .menu-toggle span { background: #1c1c1c !important; height: 2px !important; width: 22px !important; }
+}
