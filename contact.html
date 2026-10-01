@@ -37,7 +37,7 @@
 </section>
 <section class="section">
   <div class="wrap detail">
-    <form class="form" id="contact-form" action="#" method="post" data-portal="" data-form="" data-region="na1" novalidate>
+    <form class="form" id="contact-form" action="#" method="post" data-portal="243205128" data-form="be7d8240-64c7-4410-89b8-d10d13c9f2f8" data-region="na2" novalidate>
       <div class="form-grid">
         <div class="field"><label for="fn">First name</label><input id="fn" name="firstname" autocomplete="given-name" required></div>
         <div class="field"><label for="ln">Last name</label><input id="ln" name="lastname" autocomplete="family-name" required></div>
@@ -77,6 +77,7 @@
   </div>
 </footer>
 <script src="js/site.js"></script>
+<script id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/243205128.js"></script>
 <script>
 (function () {
   var form = document.getElementById('contact-form');
@@ -91,10 +92,7 @@
     e.preventDefault();
     var portal = form.getAttribute('data-portal');
     var guid = form.getAttribute('data-form');
-    if (!portal || !guid) {
-      note.textContent = 'This form is styled and ready. HubSpot portal and form IDs still need to be added before it can submit.';
-      return;
-    }
+    var region = form.getAttribute('data-region') || 'na1';
     if (!form.reportValidity()) return;
     var fields = [];
     Array.prototype.forEach.call(form.elements, function (el) {
@@ -103,9 +101,10 @@
       if (!el.value) return;
       fields.push({ name: el.name, value: el.value });
     });
+    var host = region === 'na1' ? 'https://api.hsforms.com' : 'https://api-' + region + '.hsforms.com';
     btn.disabled = true;
     note.textContent = 'Sending…';
-    fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + portal + '/' + guid, {
+    fetch(host + '/submissions/v3/integration/submit/' + portal + '/' + guid, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -117,8 +116,9 @@
         }
       })
     }).then(function (res) {
-      if (!res.ok) throw new Error('HubSpot ' + res.status);
-      return res.json().catch(function () { return {}; });
+      return res.text().then(function (text) {
+        if (!res.ok) throw new Error(text || ('HubSpot ' + res.status));
+      });
     }).then(function () {
       form.reset();
       note.textContent = 'Thank you. A member of the GRPR team will follow up.';
