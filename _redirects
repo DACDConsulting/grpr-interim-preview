@@ -2,7 +2,9 @@
 /team /team.html 200
 /contact /contact.html 200
 /why-grpr /why-grpr.html 200
-/government-affairs /government-affairs.html 200
+/government-relations /government-relations.html 200
+/government-affairs /government-relations.html 301
+/government-affairs.html /government-relations.html 301
 /public-relations /public-relations.html 200
 /crisis-command /crisis-command.html 200
 /grids /grids.html 200
