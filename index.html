@@ -14,7 +14,19 @@
 .person .photo img{opacity:1;display:block;width:100%;height:100%;object-fit:cover}
 .reveal,.ins-card{opacity:1!important;transform:none!important}
 </style>
-</head>
+<style>
+.path{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.path a{display:block;background:#fff;border:1px solid #e6e6e6;border-top:4px solid #A91D37;padding:18px 18px 20px;text-decoration:none;color:inherit}
+.path a:hover{border-color:#A91D37}
+.path b{display:block;font-size:18px;margin:6px 0}
+.path span{display:block;color:#5c6570;font-size:14.5px;line-height:1.45}
+.home-form{display:grid;gap:10px}
+.home-form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.home-form input,.home-form select,.home-form textarea{width:100%;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;padding:10px 12px;font:inherit}
+.home-form textarea{min-height:88px}
+.home-form label{font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:800px){.path,.home-form .row{grid-template-columns:1fr}}
+</style></head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="utility"><div class="wrap"><span class="u-left">Government Relations and Public Relations · A division of Gray Reed Advisory Services</span><span class="u-links"><a href="https://www.grayreedadvisory.com">Gray Reed Advisory</a><a href="https://www.grayreed.com">Gray Reed</a><a href="https://www.linkedin.com/" aria-label="LinkedIn">LinkedIn</a></span></div></div>
@@ -36,6 +48,13 @@
 </div></div>
 <div class="hero-media color-photo slides-media"><div class="slide-media is-active"><img class="base" src="https://images.unsplash.com/photo-1666969565832-b55bf42a900d?auto=format&fit=crop&w=1600&q=80" alt="Downtown Austin skyline"></div><div class="slide-media"><img class="base" src="https://images.unsplash.com/photo-1568807697609-e8aacc588ad9?auto=format&fit=crop&w=1600&q=80" alt="Texas State Capitol"></div><div class="slide-media"><img class="base" src="https://images.unsplash.com/photo-1634064735992-266742efd9d4?auto=format&fit=crop&w=1600&q=80" alt="Dallas skyline"></div></div>
 </section>
+<section class="section tight" id="path"><div class="wrap">
+<div class="s-head"><div><div class="eyebrow">What is in front of you?</div><h2>Start with the matter.</h2></div><p>Choose the closest fit. We will take it from there.</p></div>
+<div class="path">
+<a href="government-relations.html"><div class="eyebrow">Government relations</div><b>A bill, a rule, or a hearing</b><span>Advocacy, monitoring, and the materials for the meeting.</span></a>
+<a href="public-relations.html"><div class="eyebrow">Public relations</div><b>A headline, a reporter, or a reputation issue</b><span>The message, the spokesperson, and the statement.</span></a>
+<a href="contact.html?interest=Other"><div class="eyebrow">Both</div><b>The policy and the story</b><span>One plan. Legal work, if any, stays with Gray Reed.</span></a>
+</div></div></section>
 <section class="section" id="services"><div class="wrap">
 <div class="s-head"><div><div class="eyebrow">What we do</div><h2>Two disciplines. <br>One strategy.</h2></div><p>Policy outcomes and public perception are rarely separate problems. We plan them together, so every message and every meeting pulls in the same direction.</p></div>
 <div class="services two"><article class="svc"><div class="num">01</div><h3>Government Relations</h3><p>Legislative and regulatory strategy, advocacy and monitoring across every branch of Texas government.</p><ul><li>Strategy</li><li>Advocacy</li><li>Legislative Monitoring</li></ul><a class="link" href="government-relations.html">Explore <span class="arrow"></span></a></article><article class="svc"><div class="num">02</div><h3>Public Relations</h3><p>Strategic communications, crisis communication and media training that protect and advance your reputation.</p><ul><li>Strategic Communications</li><li>Crisis Communication</li><li>Media Training</li></ul><a class="link" href="public-relations.html">Explore <span class="arrow"></span></a></article></div>
@@ -72,8 +91,37 @@
 <section class="section tight flush" style="padding-top:0">
   <div class="wrap"><div class="family"><a href="https://www.grayreed.com"><img src="https://www.grayreed.com/templates/site/images/logo.png" alt="Gray Reed"><span>Full-service Texas law firm <span class="arrow" style="margin-left:6px"></span></span></a><a href="https://www.grayreedadvisory.com"><img src="https://www.grprpublicaffairs.com/wp-content/uploads/sites/895/2023/08/Gray-Reed-Advisory-Services-LLC-logo-1.svg" alt="Gray Reed Advisory"><span>Business advisory services <span class="arrow" style="margin-left:6px"></span></span></a><a href="https://www.grprpublicaffairs.com"><img src="https://www.grprpublicaffairs.com/wp-content/uploads/sites/895/2023/08/grpr-logo-color.svg" alt="GRPR"><span>Government relations and public relations <span class="arrow" style="margin-left:6px"></span></span></a></div></div>
 </section>
-<section class="cta"><div class="wrap"><div><div class="eyebrow light">Start a conversation</div><h2>Need to be heard in <em class="cta-em">Austin?</em></h2></div><div><p>Tell us what is in front of you. We will help you prepare the advocacy and the message.</p><div class="actions"><a class="btn white" href="contact.html">Contact Us <span class="arrow"></span></a><a class="btn ghost" style="color:#fff;border-color:rgba(255,255,255,.4)" href="team.html">Meet the Team</a></div></div></div></section>
+<section class="cta"><div class="wrap"><div><div class="eyebrow light">Start a conversation</div><h2>Need to be heard in <em class="cta-em">Austin?</em></h2></div><div><p>Tell us what is in front of you. We will help you prepare the advocacy and the message.</p>
+<form class="home-form" id="home-form" data-portal="243205128" data-form="be7d8240-64c7-4410-89b8-d10d13c9f2f8" data-region="na2">
+<div class="row"><div><label for="hfn">First name</label><input id="hfn" name="firstname" required></div><div><label for="hln">Last name</label><input id="hln" name="lastname" required></div></div>
+<div class="row"><div><label for="hem">Email</label><input id="hem" name="email" type="email" required></div><div><label for="hph">Phone</label><input id="hph" name="mobilephone" type="tel" required></div></div>
+<div><label for="hint">Area of interest</label><select id="hint" name="area_of_interest" required><option value="">Select…</option><option value="Government Affairs">Government Relations</option><option>Public Relations</option><option>Crisis Command</option><option>GRIDS</option><option>Other</option></select></div>
+<div><label for="hmsg">How can we help?</label><textarea id="hmsg" name="how_can_we_help" required></textarea></div>
+<button class="btn white" type="submit">Send message <span class="arrow"></span></button>
+<small id="home-note" style="display:block;color:rgba(255,255,255,.75)">Do not include confidential information. Submitting this form does not create a relationship.</small>
+</form></div></div></section>
 </main>
 <footer class="site-footer"><div class="wrap"><div class="f-top"><div class="f-brand"><img src="https://www.grprpublicaffairs.com/wp-content/uploads/sites/895/2023/08/grpr-logo-color.svg" alt="GRPR"><p>Government relations and strategic communications for organizations navigating evolving political and public landscapes.</p></div><div class="f-col"><h5>Services</h5><ul><li><a href="government-relations.html">Government Relations</a></li><li><a href="public-relations.html">Public Relations</a></li></ul></div><div class="f-col"><h5>Solutions</h5><ul><li><a href="crisis-command.html">Crisis Command</a></li><li><a href="grids.html">GRIDS</a></li></ul></div><div class="f-col"><h5>Gray Reed</h5><ul><li><a href="team.html">Our Team</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div></div></div></footer>
 <script src="js/site.js"></script>
-<div class="legal-bar"><div class="wrap"><span>© <span data-year>2026</span> Gray Reed Advisory Services LLC</span><span>GRPR is not a law firm and this site is not legal advice. <a href="disclaimer.html">Disclaimer</a> · <a href="privacy.html">Privacy</a></span></div></div></body></html>
+<div class="legal-bar"><div class="wrap"><span>© <span data-year>2026</span> Gray Reed Advisory Services LLC</span><span>GRPR is not a law firm and this site is not legal advice. <a href="disclaimer.html">Disclaimer</a> · <a href="privacy.html">Privacy</a></span></div></div><script>
+(function(){
+  var q=new URLSearchParams(location.search).get("interest");
+  var form=document.getElementById("home-form");
+  if(!form) return;
+  if(q){ var sel=form.querySelector("[name=area_of_interest]"); if(sel) sel.value=q; }
+  var note=document.getElementById("home-note");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    if(!form.reportValidity()) return;
+    var fields=[];
+    Array.prototype.forEach.call(form.elements,function(el){ if(el.name&&!el.disabled) fields.push({name:el.name,value:el.value}); });
+    var btn=form.querySelector("button");
+    btn.disabled=true; note.textContent="Sending…";
+    fetch("https://api-na2.hsforms.com/submissions/v3/integration/submit/243205128/be7d8240-64c7-4410-89b8-d10d13c9f2f8",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:fields,context:{pageUri:location.href,pageName:document.title}})})
+    .then(function(res){ return res.text().then(function(text){ if(!res.ok) throw new Error(text||""); }); })
+    .then(function(){ form.reset(); note.textContent="Thank you. A member of the GRPR team will follow up."; })
+    .catch(function(){ note.textContent="We could not send that just now. Please call 214.954.4135 or try again."; })
+    .then(function(){ btn.disabled=false; });
+  });
+})();
+</script></body></html>
