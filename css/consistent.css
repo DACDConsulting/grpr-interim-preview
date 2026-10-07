@@ -51,4 +51,3 @@ h2 { font-size: clamp(28px, 3.2vw, 42px); }
 .legal-bar .wrap{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:36px;padding:6px 0}
 .legal-bar a{color:#6d747c;text-decoration:underline}
 @media(max-width:700px){.legal-bar .wrap{flex-direction:column;align-items:flex-start}}
-.slides-media .slide-media img, .hero .slide-media img { filter: none !important; -webkit-filter: none !important; }
