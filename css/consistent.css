@@ -51,3 +51,9 @@ h2 { font-size: clamp(28px, 3.2vw, 42px); }
 .legal-bar .wrap{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:36px;padding:6px 0}
 .legal-bar a{color:#6d747c;text-decoration:underline}
 @media(max-width:700px){.legal-bar .wrap{flex-direction:column;align-items:flex-start}}
+
+.person.cta{grid-column:span 3;background:#A91D37;color:#fff;padding:28px 28px 24px;display:flex;flex-direction:column;justify-content:flex-end;min-height:100%}
+.person.cta h3{color:#fff;margin:8px 0}
+.person.cta p{color:#fff;margin:0 0 16px}
+.person.cta .btn{align-self:flex-start}
+@media(max-width:1100px){.person.cta{grid-column:span 1}}
