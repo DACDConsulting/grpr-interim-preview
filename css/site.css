@@ -347,7 +347,7 @@ strong { font-family: var(--font-semi); font-weight: 600; }
   .people { grid-template-columns: repeat(3, 1fr); }
   .f-top { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .menu-toggle { display: block; }
   .site-header { backdrop-filter: none; background: #fff; }
   .nav { position: absolute; top: 100%; left: 0; right: 0; height: calc(100vh - 84px); height: calc(100dvh - 84px); background: #fff; display: block; padding: 12px var(--gutter) 40px; overflow-y: auto;
