@@ -392,7 +392,7 @@ strong { font-family: var(--font-semi); font-weight: 600; }
   .hero-facts .k { font-size: 32px; }
   .brand img { height: 30px; }
   .brand.grpr img { height: 38px; }
-  .people, .people.three { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .people, .people.three { grid-template-columns: 1fr; gap: 22px; }
 }
 @media (max-width: 340px) {
   .people, .people.three { grid-template-columns: 1fr; }
@@ -683,3 +683,15 @@ section[id] { scroll-margin-top: 150px; }
 .bio-top { display: flex; align-items: center; gap: 28px; }
 .bio-top .photo { width: 220px; height: 220px; flex: none; aspect-ratio: 1 / 1; overflow: hidden; margin: 0; }
 .bio-top .photo img { position: static; width: 220px; height: 220px; object-fit: cover; object-position: center 15%; display: block; }
+
+/* Mobile: keep titles, emails and the PR contacts from clipping */
+@media (max-width: 640px) {
+  .people, .people.three { grid-template-columns: 1fr; }
+  .person .title, .person h3, .person .contact a, .mini b, .mini small, h1, h2, .slide-title, .lead {
+    overflow-wrap: anywhere;
+  }
+  .person .contact a { word-break: break-all; }
+  .mini { min-width: 0; }
+  .aside, .detail, .wrap { min-width: 0; }
+  .slider-tab .t-label { display: block; font-size: 11px; line-height: 1.2; min-height: 0; }
+}
