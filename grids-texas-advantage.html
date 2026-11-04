@@ -16,11 +16,12 @@
   <header class="gr-head">
     <div class="wrap">
       <a class="logo" href="https://www.grayreed.com/" target="_blank" rel="noopener" aria-label="Gray Reed"><img src="assets/gray-reed-logo.png" alt="Gray Reed"></a>
-      <nav class="topnav" aria-label="Primary">
+      <nav class="topnav" id="grids-nav" aria-label="Primary">
         <a class="tx" href="https://www.grayreed.com/Our-People" target="_blank" rel="noopener">People</a>
         <a class="tx" href="https://www.grayreed.com/Practices" target="_blank" rel="noopener">Practices</a>
         <a class="tx" href="https://www.grayreed.com/Industries" target="_blank" rel="noopener">Industries</a>
       </nav>
+      <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
   <main id="app"></main>
@@ -32,5 +33,21 @@
   </footer>
   <!-- Pastel: paste the Gray Reed review snippet here when the project ID is ready. Do not add it to the GRPR repo. -->
   <script type="module" src="js/grids-tx.js"></script>
+<script>
+(function () {
+  var btn = document.querySelector('.menu-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var open = document.body.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('.topnav a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.body.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
 </body>
 </html>
