@@ -26,8 +26,12 @@
     if (check) check.checked = !!open;
     if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
-  if (check) check.addEventListener('change', function () { setOpen(check.checked); });
-  else if (toggle) toggle.addEventListener('click', function (e) { e.preventDefault(); setOpen(!body.classList.contains('nav-open')); });
+  if (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      setOpen(!body.classList.contains('nav-open'));
+    });
+  }
   document.querySelectorAll('.nav a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
   document.querySelectorAll('.nav .has-dd > button').forEach(function (btn) {
     btn.addEventListener('click', function () {
