@@ -66,13 +66,33 @@
     var media = root.querySelectorAll('.slide-media');
     var tabs = root.querySelectorAll('.slider-tab');
     var cur = 0;
+    var timer;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dur = 7000;
+    function restartBar() {
+      var bar = tabs[cur] && tabs[cur].querySelector('.t-bar i');
+      if (!bar) return;
+      bar.style.animation = 'none';
+      void bar.offsetWidth;
+      bar.style.animation = '';
+    }
+    function schedule() {
+      clearTimeout(timer);
+      if (reduce || tabs.length < 2) return;
+      timer = setTimeout(function () { go(cur + 1); }, dur);
+    }
     function go(n) {
       cur = (n + tabs.length) % tabs.length;
       [copies, media, tabs].forEach(function (list) {
         list.forEach(function (el, i) { el.classList.toggle('is-active', i === cur); });
       });
+      restartBar();
+      schedule();
     }
     tabs.forEach(function (t, i) { t.addEventListener('click', function () { go(i); }); });
+    root.addEventListener('mouseenter', function () { root.classList.add('paused'); clearTimeout(timer); });
+    root.addEventListener('mouseleave', function () { root.classList.remove('paused'); schedule(); });
+    schedule();
   });
 })();
 
