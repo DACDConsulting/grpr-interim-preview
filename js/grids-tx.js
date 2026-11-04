@@ -98,7 +98,7 @@ const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke
 const carr = (dk)=>`<span class="carr${dk?" dk":""}" aria-hidden="true">${ARROW}</span>`;
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
 function toolsHTML(){
-  return `<div class="tools"><a href="#" data-print>PDF</a><a class="email-page" href="mailto:?subject=GRIDS%3A%20The%20Texas%20Advantage">Email</a></div>`;
+  return `<div class="tools"><a class="email-page" href="mailto:?subject=GRIDS%3A%20The%20Texas%20Advantage">Email</a></div>`;
 }
 
 /* ---------- Sidebar ---------- */
