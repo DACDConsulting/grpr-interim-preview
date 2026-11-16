@@ -317,6 +317,7 @@ strong { font-family: var(--font-semi); font-weight: 600; }
 .family a + a { border-left: 1px solid var(--line); }
 .family a:hover { background: var(--wash); }
 .family img { height: 34px; width: auto; object-fit: contain; object-position: left; }
+.family img.advisory-logo { height: 52px; }
 .family span { font-size: 14px; color: var(--slate); }
 
 /* ---------- Footer ---------- */
