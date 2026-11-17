@@ -48,6 +48,8 @@ export default defineConfig({
         if (existsSync('css')) cpSync('css', 'dist/css', { recursive: true });
         if (existsSync('assets')) cpSync('assets', 'dist/assets', { recursive: true });
         if (existsSync('_redirects')) cpSync('_redirects', 'dist/_redirects');
+        if (existsSync('sitemap.xml')) cpSync('sitemap.xml', 'dist/sitemap.xml');
+        if (existsSync('robots.txt')) cpSync('robots.txt', 'dist/robots.txt');
         if (existsSync('netlify.toml')) cpSync('netlify.toml', 'dist/netlify.toml');
       }
     }
